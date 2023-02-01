@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
-import '../TaskCard.css'
 
 export function InputTask({ tasks, setTasks }) {
 	const [idCounter, setIdCounter] = useState(0)

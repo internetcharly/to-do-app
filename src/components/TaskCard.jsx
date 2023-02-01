@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from 'react'
-import '../TaskCard.css'
 
 export function TaskCard({ tasks, setTasks }) {
 	const deleteTask = (id) => {
