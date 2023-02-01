@@ -9,9 +9,8 @@ function App() {
 	)
 
 	return (
-		<main>
-			<h1>Task To Do</h1>
-			<div className='task-container'>
+		<main className='dark:bg-slate-800 h-screen'>
+			<div className='flex flex-col'>
 				<InputTask tasks={tasks} setTasks={setTasks} />
 				<TaskCard tasks={tasks} setTasks={setTasks} />
 			</div>
