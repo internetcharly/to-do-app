@@ -12,10 +12,10 @@ export function TaskCard({ tasks, setTasks }) {
 	}, [tasks])
 
 	return (
-		<div className='flex flex-col content-center flex-wrap'>
+		<div className='flex flex-col content-center flex-wrap bg-orange-400 mt-16 mb-16 w-1/2 min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-3/4 self-center'>
 			{tasks.map((task) => (
-				<div key={task.id} className='flex mb-6 ml-6'>
-					<div className='flex-shrink dark:text-white'>
+				<div key={task.id} className='flex mb-6 ml-6 justify-between'>
+					<div className='flex-shrink dark:text-white pr-4'>
 						<p>{task.description}</p>
 					</div>
 					<div onClick={() => deleteTask(task.id)}>

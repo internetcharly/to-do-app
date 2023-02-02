@@ -18,7 +18,7 @@ export function InputTask({ tasks, setTasks }) {
 		setInputValue('')
 	}
 	return (
-		<div className='mt-16 w-1/2 min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-3/4 self-center'>
+		<div className='mt-16 mb-16 w-1/2 min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-3/4 self-center'>
 			<div className='relative text-gray-700'>
 				<input
 					type='text'
