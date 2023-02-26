@@ -29,7 +29,7 @@ export function TaskCard() {
 	}
 
 	return (
-		<div className='flex flex-col items-center justify-center'>
+		<div className='flex flex-col items-center justify-center '>
 			<form
 				onSubmit={handleAddTask}
 				className='bg-white rounded-lg shadow-lg p-4 flex items-center mb-4 w-96'
