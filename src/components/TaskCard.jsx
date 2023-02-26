@@ -29,7 +29,7 @@ export function TaskCard() {
 	}
 
 	return (
-		<div className='flex flex-col items-center justify-center'>
+		<div className='flex flex-col items-center justify-center '>
 			<form
 				onSubmit={handleAddTask}
 				className='bg-white rounded-lg shadow-lg p-4 flex items-center mb-4 w-96'
@@ -64,13 +64,13 @@ export function TaskCard() {
 						<div>
 							<button
 								onClick={() => handleCompleteTask(index)}
-								className='text-gray-500 hover:text-gray-700'
+								className='text-gray-500 hover:text-green-600'
 							>
 								<CheckCircleIcon className='h-5 w-5' />
 							</button>
 							<button
 								onClick={() => handleDeleteTask(index)}
-								className='text-gray-500 hover:text-gray-700 ml-2'
+								className='text-gray-500 hover:text-red-600 ml-2'
 							>
 								<TrashIcon className='h-5 w-5' />
 							</button>
