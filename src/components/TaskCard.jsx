@@ -1,41 +1,83 @@
-/* eslint-disable react/prop-types */
-import { useEffect } from 'react'
+import { CheckCircleIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { useState } from 'react'
 
-export function TaskCard({ tasks, setTasks }) {
-	const deleteTask = (id) => {
-		const newTasks = tasks.filter((task) => task.id !== id)
+export function TaskCard() {
+	const [tasks, setTasks] = useState([])
+	const [newTask, setNewTask] = useState('')
+
+	const handleInputChange = (event) => {
+		setNewTask(event.target.value)
+	}
+
+	const handleAddTask = (event) => {
+		event.preventDefault()
+		if (newTask === '') return
+		setTasks([...tasks, { text: newTask, completed: false }])
+		setNewTask('')
+	}
+
+	const handleCompleteTask = (index) => {
+		const newTasks = [...tasks]
+		newTasks[index].completed = true
 		setTasks(newTasks)
 	}
 
-	useEffect(() => {
-		localStorage.setItem('taskList', JSON.stringify(tasks))
-	}, [tasks])
+	const handleDeleteTask = (index) => {
+		const newTasks = [...tasks]
+		newTasks.splice(index, 1)
+		setTasks(newTasks)
+	}
 
 	return (
-		<div className='flex flex-col content-center flex-wrap bg-orange-400 mt-16 mb-16 w-1/2 min-w-1/2 sm:min-w-1/2 md:min-w-1/2 lg:min-w-3/4 self-center'>
-			{tasks.map((task) => (
-				<div key={task.id} className='flex mb-6 ml-6 justify-between'>
-					<div className='flex-shrink dark:text-white pr-4'>
-						<p>{task.description}</p>
-					</div>
-					<div onClick={() => deleteTask(task.id)}>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							fill='none'
-							viewBox='0 0 24 24'
-							strokeWidth={1.5}
-							stroke='currentColor'
-							className='w-6 h-6'
+		<div className='flex flex-col items-center justify-center'>
+			<form
+				onSubmit={handleAddTask}
+				className='bg-white rounded-lg shadow-lg p-4 flex items-center mb-4 w-96'
+			>
+				<input
+					type='text'
+					placeholder='Enter task'
+					className='border-gray-300 border rounded-lg py-2 px-4 w-full mr-2 text-gray-700 leading-tight focus:outline-none focus:border-blue-500'
+					value={newTask}
+					onChange={handleInputChange}
+				/>
+				<button
+					type='submit'
+					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+				>
+					Add
+				</button>
+			</form>
+			<ul className='bg-white rounded-lg shadow-lg p-4 max-h-96 overflow-y-auto w-96 text-gray-500 text-left'>
+				{tasks.map((task, index) => (
+					<li
+						key={index}
+						className='border-gray-300 border-b py-2 px-4 flex justify-between items-center'
+					>
+						<div
+							className={`${
+								task.completed ? 'text-gray-500 line-through' : ''
+							} break-all`}
 						>
-							<path
-								strokeLinecap='round'
-								strokeLinejoin='round'
-								d='M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0'
-							/>
-						</svg>
-					</div>
-				</div>
-			))}
+							{task.text}
+						</div>
+						<div>
+							<button
+								onClick={() => handleCompleteTask(index)}
+								className='text-gray-500 hover:text-gray-700'
+							>
+								<CheckCircleIcon className='h-5 w-5' />
+							</button>
+							<button
+								onClick={() => handleDeleteTask(index)}
+								className='text-gray-500 hover:text-gray-700 ml-2'
+							>
+								<TrashIcon className='h-5 w-5' />
+							</button>
+						</div>
+					</li>
+				))}
+			</ul>
 		</div>
 	)
 }
